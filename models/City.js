@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const locationSchema = Schema(
+const citySchema = Schema(
   {
     name: { type: String, lowercase: true, trim: true },
     temperature: { type: Number, required: true },
@@ -10,4 +10,4 @@ const locationSchema = Schema(
   { timestamps: true }
 );
 
-export default model("Location", locationSchema);
+export default model("City", citySchema);

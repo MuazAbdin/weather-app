@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/weather", api);
+app.use("/weather/v1/cities", api);
 
 app.use((err, req, res, next) => {
   console.log(err);
