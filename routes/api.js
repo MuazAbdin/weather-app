@@ -35,8 +35,11 @@ router.post("/", async (req, res) => {
 
 router.delete("/:name", async (req, res) => {
   try {
+    const deletedCity = await City.findOneAndDelete({ name: req.params.name });
+    if (!deletedCity)
+      return res.status(404).send({ msg: "resource not found" });
+    res.send(deletedCity);
   } catch (error) {
-    console.log(error.message);
     res.status(400).send({ msg: error.message });
   }
 });
