@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 
-export const getCityWeather = async (cityName) => {
+export const fetchCityWeather = async (cityName) => {
   const { weather, main, dt, sys, name } = (
     await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${process.env.API_KEY}&units=metric`

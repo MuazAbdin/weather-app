@@ -1,14 +1,13 @@
-import axios from "axios";
 import { Router } from "express";
-import moment from "moment";
-import { getCityWeather } from "../controllers/cityController.js";
+import { fetchCityWeather } from "../controllers/cityController.js";
+import City from "../models/City.js";
 
 const router = Router();
 
 router.get("/:name", async (req, res) => {
   try {
     const cityName = req.params.name;
-    const cityWeather = await getCityWeather(cityName);
+    const cityWeather = await fetchCityWeather(cityName);
     res.send(cityWeather);
   } catch (error) {
     res.status(400).send({ msg: error.message });
@@ -17,8 +16,9 @@ router.get("/:name", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
+    const allCities = await City.find();
+    res.send(allCities);
   } catch (error) {
-    console.log(error.message);
     res.status(400).send({ msg: error.message });
   }
 });
