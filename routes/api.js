@@ -25,8 +25,10 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    const newCity = new City(req.body);
+    await newCity.save();
+    res.status(201).send(newCity);
   } catch (error) {
-    console.log(error.message);
     res.status(400).send({ msg: error.message });
   }
 });
