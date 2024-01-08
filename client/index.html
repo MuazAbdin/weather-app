@@ -4,29 +4,91 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./@fortawesome/fontawesome-free/css/all.css" />
+    <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="./jquery/dist/jquery.js" defer></script>
     <script src="./handlebars/dist/handlebars.js" defer></script>
+    <script src="./utils/constants.js" defer></script>
     <script src="Model.js" defer></script>
     <script src="Renderer.js" defer></script>
     <script src="Controller.js" defer></script>
-    <title>My Expenses</title>
+    <title>Weather App</title>
   </head>
   <body>
     <main>
-      <section class="search-controller">
+      <form class="search-controller" onsubmit="return getCityWeather(event)">
         <input
           type="text"
           id="city-input"
           name="city"
-          placeholder="Search fo a city"
+          placeholder="Search for a city"
+          required
         />
-        <button onclick="">
+        <button class="search-btn">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-      </section>
-      <article class="cities"></article>
-      <section class=""></section>
+      </form>
+      <article class="cities-deck"></article>
+      <article class="home-city c-flex"></article>
     </main>
+    <footer class="main-footer">
+      <nav class="nav c-flex">
+        <button class="btn c-flex" onclick="showSavedCities()">
+          <i class="fa-solid fa-list"></i>
+          <!-- <span>All Cities</span> -->
+        </button>
+        <button class="btn home-btn c-flex" onclick="getHomeCity()">
+          <i class="fa-solid fa-house"></i>
+          <!-- <span>Home</span> -->
+        </button>
+        <button class="btn c-flex">
+          <i class="fa-solid fa-gear"></i>
+          <!-- <span>Settings</span> -->
+        </button>
+      </nav>
+    </footer>
+
+    <!-- HANDLEBARS TEMPLATES -->
+    <script type="text/x-handlebars-template" id="city-template">
+      {{#each cities}}
+        <article id="city-{{@index}}" class="city-card">
+          <h2 class="location">{{name}}, {{country}}</h2>
+          <span class="temperature">{{temperature}}&#176;</span>
+          <span class="condition">{{condition}}</span>
+          <div class="weather-img">
+            <img
+              src="https://openweathermap.org/img/wn/{{conditionPic}}@2x.png"
+              alt="Weather Icon"
+            />
+          </div>
+          <div class="dt">
+            <!-- <p>Last Updated:</p> -->
+            <p>{{lastUpdated}}</p>
+          </div>
+          <div class="edit-btns">
+            {{#if isSaved}}
+              <i class="btn fa-solid fa-trash-can"></i>
+            {{else}}
+              <i class="btn fa-solid fa-plus"></i>
+            {{/if}}
+            <i class="btn fa-solid fa-arrows-rotate"></i>
+          </div>
+        </article>
+      {{/each}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="home-template">
+      <h2 class="location">{{name}}, {{country}}</h2>
+      <span class="temperature">{{temperature}}&#176;</span>
+      <span class="condition">{{condition}}</span>
+      <div class="weather-img">
+        <img
+          src="https://openweathermap.org/img/wn/{{conditionPic}}@2x.png"
+          alt="Weather Icon"
+        />
+      </div>
+      <div class="dt">{{lastUpdated}}</div>
+    </script>
+    <!-- #################### -->
   </body>
 </html>

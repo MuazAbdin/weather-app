@@ -4,18 +4,12 @@ import City from "../models/City.js";
 
 const router = Router();
 
-router.get("/:name", async (req, res) => {
-  try {
-    const cityName = req.params.name;
-    const cityWeather = await fetchCityWeather(cityName);
-    res.send(cityWeather);
-  } catch (error) {
-    res.status(400).send({ msg: error.message });
-  }
-});
-
 router.get("/", async (req, res) => {
   try {
+    if (Object.keys(req.query).length > 0) {
+      const cityWeather = await fetchCityWeather(req.query);
+      return res.send(cityWeather);
+    }
     const allCities = await City.find();
     res.send(allCities);
   } catch (error) {
@@ -28,6 +22,27 @@ router.post("/", async (req, res) => {
     const newCity = new City(req.body);
     await newCity.save();
     res.status(201).send(newCity);
+  } catch (error) {
+    res.status(400).send({ msg: error.message });
+  }
+});
+
+router.patch("/:name", async (req, res) => {
+  try {
+    const cityName = req.params.name;
+    const cityWeather = await fetchCityWeather({ cityName });
+    const updatedCity = await City.findOneAndUpdate(
+      { name: cityName },
+      {
+        temperature: cityWeather.temperature,
+        condition: cityWeather.condition,
+        conditionPic: cityWeather.conditionPic,
+        lastUpdated: cityWeather.lastUpdated,
+      },
+      { new: true }
+    );
+    if (!updatedCity) return res.send(cityWeather);
+    return res.send(updatedCity);
   } catch (error) {
     res.status(400).send({ msg: error.message });
   }
