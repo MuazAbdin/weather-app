@@ -1,22 +1,18 @@
 body {
   width: min(600px, 100vw);
-  /* height: 100vh; */
   margin: 0 auto;
-  /* padding: 5px; */
   font-family: var(--main-font);
 }
 
 main {
   height: 100vh;
   margin: 0;
-  /* padding-top: 2rem; */
   padding-bottom: 6rem;
   background-color: var(--blue-dark);
 }
 
 .search-controller {
   background-color: var(--blue-dark);
-  /* width: min(350px, 90%); */
   margin: 0 auto;
   position: sticky;
   top: 0;
@@ -31,8 +27,6 @@ main {
 .search-controller > input {
   flex-grow: 1;
   border-radius: 50px;
-  border: none;
-  border: 2px solid var(--blue-dark);
   border: none;
   padding: 0.5rem 1rem;
   font-family: var(--main-font);
@@ -68,14 +62,10 @@ main {
   bottom: 0;
   left: auto;
   right: auto;
-  /* transform: translateX(-5px); */
   background-color: var(--blue-light);
 }
 
 .nav {
-  /* gap: 10rem; */
-  /* padding: 0 2rem; */
-  /* justify-content: space-between; */
   position: relative;
 }
 
@@ -85,7 +75,6 @@ nav > .btn {
   font-size: 2rem;
   font-family: var(--main-font);
   box-shadow: none;
-  /* width: 7rem; */
   height: 4rem;
 }
 nav > .btn:first-child {
@@ -101,7 +90,6 @@ nav > .home-btn {
   bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  /* flex-grow: 0; */
   background-color: var(--blue-light);
   width: 8rem;
   height: 8rem;
@@ -146,7 +134,6 @@ nav > .btn:hover {
   margin: 2rem 1rem;
   flex-direction: column;
   gap: 1rem;
-  /* position: relative; */
 }
 
 .home-city > .temperature {
@@ -177,11 +164,9 @@ nav > .btn:hover {
   position: absolute;
   top: 0;
   left: 0;
-  /* grid-area: btn; */
   font-size: 2rem;
   display: flex;
   flex-direction: column;
-  /* gap: 0.75rem; */
 }
 
 .edit-btns > .btn {

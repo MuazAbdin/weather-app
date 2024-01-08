@@ -34,7 +34,7 @@ class Model {
       data: fitler,
     });
     const cityIdx = this.#insertCity(city);
-    if (this.#data[cityIdx].isSaved) await this.saveCity(cityIdx);
+    if (this.#data[cityIdx].isSaved) await this.updateCity(cityIdx);
     return this.#data[cityIdx];
   }
 
@@ -64,8 +64,9 @@ class Model {
       url: `http://localhost:3000/weather/v1/cities/${cityName}`,
       method: "DELETE",
     });
-    const removedCity = this.#data.splice(cityIdx, 1);
-    return removedCity;
+    this.#data[cityIdx].isSaved = false;
+    // const removedCity = this.#data.splice(cityIdx, 1);
+    return this.#data[cityIdx];
   }
 
   get data() {
