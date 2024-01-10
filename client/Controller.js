@@ -1,8 +1,8 @@
 const model = new Model();
 const renderer = new Renderer();
 
-const citiesContainer = $(DOMElements.citiesContainer);
-const searchInput = $(DOMElements.searchInput);
+const citiesContainer = $(DOM_ELEMENTS.citiesContainer);
+const searchInput = $(DOM_ELEMENTS.searchInput);
 
 async function getCityWeather(event) {
   try {
@@ -51,7 +51,7 @@ async function showSavedCities() {
 
 citiesContainer.on("click", ".fa-plus", async function () {
   try {
-    const idx = $(this).closest(DOMElements.cityCard).attr("id").split("-")[1];
+    const idx = $(this).closest(DOM_ELEMENTS.cityCard).attr("id").split("-")[1];
     await model.saveCity(idx);
     renderer.renderAllCities(model.data);
   } catch (error) {
@@ -62,7 +62,7 @@ citiesContainer.on("click", ".fa-plus", async function () {
 
 citiesContainer.on("click", ".fa-trash-can", async function () {
   try {
-    const idx = $(this).closest(DOMElements.cityCard).attr("id").split("-")[1];
+    const idx = $(this).closest(DOM_ELEMENTS.cityCard).attr("id").split("-")[1];
     await model.removeCity(idx);
     renderer.renderAllCities(model.data);
   } catch (error) {
@@ -73,7 +73,7 @@ citiesContainer.on("click", ".fa-trash-can", async function () {
 
 citiesContainer.on("click", ".fa-arrows-rotate", async function () {
   try {
-    const idx = $(this).closest(DOMElements.cityCard).attr("id").split("-")[1];
+    const idx = $(this).closest(DOM_ELEMENTS.cityCard).attr("id").split("-")[1];
     await model.updateCity(idx);
     renderer.renderAllCities(model.data);
   } catch (error) {

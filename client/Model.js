@@ -22,14 +22,14 @@ class Model {
 
   /* PUBLIC API */
   async fetchAllCiteis() {
-    const allCiteis = await $.ajax(`http://localhost:3000/weather/v1/cities/`);
+    const allCiteis = await $.ajax(`${BASE_URL}/`);
     this.#data = allCiteis.map((c) => ({ ...c, isSaved: true }));
   }
 
   async fetchCity(cityName, cityCoords) {
     const fitler = cityName ? { cityName } : cityCoords;
     const city = await $.ajax({
-      url: `http://localhost:3000/weather/v1/cities/`,
+      url: `${BASE_URL}/`,
       method: "GET",
       data: fitler,
     });
@@ -40,7 +40,7 @@ class Model {
 
   async saveCity(cityIdx) {
     await $.ajax({
-      url: `http://localhost:3000/weather/v1/cities/`,
+      url: `${BASE_URL}/`,
       method: "POST",
       data: this.#data[cityIdx],
     });
@@ -50,7 +50,7 @@ class Model {
   async updateCity(cityIdx) {
     const cityName = this.#data[cityIdx].name;
     const updatedCity = await $.ajax({
-      url: `http://localhost:3000/weather/v1/cities/${cityName}`,
+      url: `${BASE_URL}/${cityName}`,
       method: "PATCH",
     });
     updatedCity.isSaved = this.#data[cityIdx].isSaved;
@@ -61,7 +61,7 @@ class Model {
   async removeCity(cityIdx) {
     const cityName = this.#data[cityIdx].name;
     await $.ajax({
-      url: `http://localhost:3000/weather/v1/cities/${cityName}`,
+      url: `${BASE_URL}/${cityName}`,
       method: "DELETE",
     });
     this.#data[cityIdx].isSaved = false;

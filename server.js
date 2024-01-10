@@ -6,7 +6,7 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import morgan from "morgan";
 import { connect } from "mongoose";
-import api from "./routes/api.js";
+import cityRouter from "./routes/cityRouter.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/weather/v1/cities", api);
+app.use("/weather/v1/cities", cityRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);

@@ -2,8 +2,8 @@ class Renderer {
   /* ATTRIBUTES */
   #cityTemplate;
   #homeTemplate;
-  #citiesContainer = $(DOMElements.citiesContainer);
-  #homeCity = $(DOMElements.homeCity);
+  #citiesContainer = $(DOM_ELEMENTS.citiesContainer);
+  #homeCity = $(DOM_ELEMENTS.homeCity);
 
   /* CONSTRUCTOR */
   constructor() {
